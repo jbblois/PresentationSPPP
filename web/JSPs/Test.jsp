@@ -1,14 +1,17 @@
+<%-- 
+    Document   : Index
+    Created on : 10 avr. 2015, 09:35:38
+    Author     : user
+--%>
+
+<%@page import="sppp.business.Extension"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <link href="design/css/bootstrap.css" rel="stylesheet">
         <link href="design/css/base.css" rel="stylesheet">
-        <title>TODO supply a title</title>
+        <title>JSP TEST</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -16,19 +19,21 @@ and open the template in the editor.
     <div class="container">
       <header class="row">
         <div class="col-lg-12">
-          Entete
+          <%@include file="Modules/Header.jsp" %>
         </div>
       </header>
       <div class="row">
         <nav class="col-lg-2">
-          Menu
+          <%@include file="Modules/Navigation.jsp" %>
         </nav>
         <section class="col-lg-10">
-          Section
+            <% 
+                out.println( ((Extension)request.getAttribute("extension")).Nom );
+            %>
         </section>
       </div>
       <footer class="row">
-          Pied de page
+          <%@include file="Modules/Footer.jsp" %>
       </footer>
     </div>
   </body>
