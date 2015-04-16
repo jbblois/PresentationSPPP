@@ -97,4 +97,45 @@ public abstract class LogigramDAO {
         
         return logigram;
     }
+
+    public static Logigram PreviousLogigram(int ID_Previous) 
+    {
+        Logigram logigram = null;
+        
+        String query =  "SELECT [Logigram].[ID],Logigram.[FID_Next],[Document].[FID_Categorie],[Document].[Nom],[Document].[Auteur] " +
+                        "FROM [Document] " +
+                        "INNER JOIN [Logigram] ON [Logigram].[ID] = [Document].[ID] " +
+                        "WHERE [Logigram].[FID_Next] = ?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setInt(1, ID_Previous);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                logigram = new Logigram();
+                logigram.ID = rs.getInt("ID");
+                logigram.Next = LogigramDAO.Select(rs.getInt("FID_Next"));
+                logigram.Categorie = CategorieDAO.Select(rs.getInt("FID_Categorie"));
+                logigram.Nom = rs.getString("Nom");
+                logigram.Auteur = rs.getString("Auteur");
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return logigram;
+    }
 }

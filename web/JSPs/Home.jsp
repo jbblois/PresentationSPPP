@@ -34,7 +34,8 @@
                     <%@include file="Modules/Navigation.jsp" %>
                 </div>
                 <div class="col-md-9">
-                    <%@include file="Modules/Main.jsp" %>
+                    <div class="row"><%@include file="Modules/Carrousel.jsp" %></div>
+                    <div class="row"><%@include file="Modules/Main.jsp" %></div>  
                 </div>
             </div>
                 <div class="row"><!-- footer -->
