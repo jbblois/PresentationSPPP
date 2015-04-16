@@ -17,14 +17,22 @@ import sppp.business.Extension;
  *
  * @author user
  */
-public class Test extends HttpServlet 
+public class Main extends HttpServlet 
 {
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
     {
-        Extension extension = new Extension();
-        extension.Nom = "TEST";
-        request.setAttribute( "extension", extension );
-        this.getServletContext().getRequestDispatcher( "/JSPs/Test.jsp" ).forward( request, response );
+        //this.getServletContext().getRequestDispatcher( "/JSPs/Main.jsp" ).forward( request, response );
         
     }
 }

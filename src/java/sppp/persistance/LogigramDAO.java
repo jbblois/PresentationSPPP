@@ -17,14 +17,14 @@ import sppp.util.Base;
  * @author user
  */
 public abstract class LogigramDAO {
-    public static Logigram Select(Integer ID)
+    public static Logigram Select(int ID)
     {
         Logigram logigram = null;
         
-        String query =  "SELECT [Logigram].[ID], Logigram.[FID_Next], [Document].[FID_Categorie], [Document].[Nom], [Document].[Auteur] " +
+        String query =  "SELECT [Logigram].[ID],Logigram.[FID_Next],[Document].[FID_Categorie],[Document].[Nom],[Document].[Auteur] " +
                         "FROM [Document] " +
                         "INNER JOIN [Logigram] ON [Logigram].[ID] = [Document].[ID] " +
-                        "WHERE [Logigram].[ID] = 1";
+                        "WHERE [Logigram].[ID] = ?;";
         
         PreparedStatement ps = null;
         
@@ -35,10 +35,50 @@ public abstract class LogigramDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 logigram = new Logigram();
-                logigram.ID = ID;
+                logigram.ID = rs.getInt("ID");
                 logigram.Next = LogigramDAO.Select(rs.getInt("FID_Next"));
                 logigram.Categorie = CategorieDAO.Select(rs.getInt("FID_Categorie"));
                 logigram.Nom = rs.getString("Nom");
+                logigram.Auteur = rs.getString("Auteur");
+            }
+        }
+        catch(Exception exc) {
+            exc.printStackTrace();
+        }
+        finally {
+            if(ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        
+        return logigram;
+    }
+    public static Logigram Select(String Nom)
+    {
+        Logigram logigram = null;
+        
+        String query =  "SELECT [Logigram].[ID],[Logigram].[FID_Next],[Document].[FID_Categorie],[Document].[Nom],[Document].[Auteur] " +
+                        "FROM [Document] " +
+                        "INNER JOIN [Logigram] ON [Logigram].[ID] = [Document].[ID] " +
+                        "WHERE [Document].[Nom] = ?;";
+        
+        PreparedStatement ps = null;
+        
+        try {
+            ps = Base.GetConnection().prepareStatement(query);
+            ps.setString(1, Nom);
+            
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                logigram = new Logigram();
+                logigram.ID = rs.getInt("ID");
+                logigram.Next = LogigramDAO.Select(rs.getInt("FID_Next"));
+                logigram.Categorie = CategorieDAO.Select(rs.getInt("FID_Categorie"));
+                logigram.Nom = Nom;
                 logigram.Auteur = rs.getString("Auteur");
             }
         }

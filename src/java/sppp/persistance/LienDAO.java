@@ -19,13 +19,13 @@ import sppp.util.Base;
  */
 public abstract class LienDAO 
 {
-    public static Lien Select(Integer ID)
+    public static Lien Select(int ID)
     {
         Lien lien = null;
         
-        String query =  "SELECT [ID], [FID_Logigram], [FID_Document], [X1], [Y1], [X2], [Y2] " +
+        String query =  "SELECT [Lien].[ID],[Lien].[FID_Logigram],[Lien].[FID_Document],[Lien].[X1],[Lien].[Y1],[Lien].[X2],[Lien].[Y2] " +
                         "FROM [Lien] " + 
-                        "WHERE [ID] = ?";
+                        "WHERE [Lien].[ID] = ?;";
         
         PreparedStatement ps = null;
         
@@ -36,7 +36,7 @@ public abstract class LienDAO
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 lien = new Lien();
-                lien.ID = ID;
+                lien.ID = rs.getInt("ID");
                 lien.Logigram = LogigramDAO.Select(rs.getInt("FID_Logiram"));
                 lien.Document = DocumentDAO.Select(rs.getInt("FID_Document"));
                 lien.X1 = rs.getInt("X1");
@@ -65,9 +65,9 @@ public abstract class LienDAO
         
         ArrayList<Lien> liens = null;
         
-        String query =  "SELECT ID, [FID_Document], [X1], [Y1], [X2], [Y2] " +
+        String query =  "SELECT [Lien].[ID],[Lien].[FID_Document],[Lien].[X1],[Lien].[Y1],[Lien].[X2],[Lien].[Y2] " +
                         "FROM [Lien] " + 
-                        "WHERE [FID_Logigram] = ?";
+                        "WHERE [Lien].[FID_Logigram] = ?;";
         
         PreparedStatement ps = null;
         

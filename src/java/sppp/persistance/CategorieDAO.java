@@ -5,6 +5,7 @@
  */
 package sppp.persistance;
 
+import java.math.BigInteger;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,9 +23,9 @@ public abstract class CategorieDAO
         
         Categorie categorie = null;
         
-        String query =  "SELECT [ID], [Nom] " +
-                        "FROM [Categorie] " + 
-                        "WHERE [ID] = ?";
+        String query = "SELECT [Categorie].[ID],[Categorie].[Nom] "
+                     + "FROM [Categorie] "
+                     + "WHERE [Categorie].[ID] = ?;";
         
         PreparedStatement ps = null;
         
@@ -35,7 +36,7 @@ public abstract class CategorieDAO
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 categorie = new Categorie();
-                categorie.ID = ID;
+                categorie.ID = rs.getInt("ID");
                 categorie.Nom = rs.getString("Nom");
             }
         }

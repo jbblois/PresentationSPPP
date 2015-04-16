@@ -22,9 +22,9 @@ public abstract class ExtensionDAO {
         
         Extension extension = null;
         
-        String query =  "SELECT [ID], [Nom] " +
+        String query =  "SELECT [Extension].[ID],[Extension].[Nom] " +
                         "FROM [Extension] " + 
-                        "WHERE [ID] = ?";
+                        "WHERE [Extension].[ID] = ?;";
         
         PreparedStatement ps = null;
         
@@ -35,7 +35,7 @@ public abstract class ExtensionDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 extension = new Extension();
-                extension.ID = ID;
+                extension.ID = rs.getInt("ID");
                 extension.Nom = rs.getString("Nom");
             }
         }

@@ -18,13 +18,13 @@ import sppp.util.Base;
  */
 public abstract class DocumentDAO 
 {
-    public static Document Select(Integer ID)
+    public static Document Select(int ID)
     {
         Document document = null;
         
-        String query =  "SELECT [ID], [FID_Categorie], [Nom], [Auteur] " +
+        String query =  "SELECT [Document].[ID],[Document].[FID_Categorie],[Document].[Nom],[Document].[Auteur] " +
                         "FROM [Document] " + 
-                        "WHERE [ID] = ?";
+                        "WHERE [Document].[ID] = ?;";
         
         PreparedStatement ps = null;
         
@@ -35,9 +35,8 @@ public abstract class DocumentDAO
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
                 document = new Document();
-                document.ID = ID;
-                //document.setDirectoryName(rs.getString("DirectoryName"));
-                document.Categorie = CategorieDAO.Select(rs.getInt("FID_Category"));
+                document.ID = rs.getInt("ID");
+                document.Categorie = CategorieDAO.Select(rs.getInt("FID_Categorie"));
                 document.Nom = rs.getString("Nom");
                 document.Auteur = rs.getString("Auteur");
             }

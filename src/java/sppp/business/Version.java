@@ -20,4 +20,16 @@ public class Version
     public Version() 
     {
     }
+    public String NomFichier()
+    {
+        return Document.Nom+'_'+Date.getYear()+'-'+Date.getMonth()+'-'+Date.getDate()+'.'+Extension.Nom;
+    }
+    public String CheminRelatif()
+    {
+        return Document.CheminRelatif()+'/'+NomFichier();
+    }
+    public String CheminAbsolu()
+    {
+        return Document.CheminAbsolu()+'/'+NomFichier();
+    }
 }

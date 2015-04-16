@@ -5,6 +5,9 @@
  */
 package sppp.business;
 
+import java.util.ArrayList;
+import sppp.persistance.LienDAO;
+
 
 /**
  *
@@ -14,6 +17,12 @@ public class Logigram extends Document
 {
     public Logigram Next;
 
-    public Logigram() {
+    public Logigram() 
+    {
+    }
+    
+    public ArrayList<Lien> Liens()
+    {
+        return LienDAO.LinksOfLogigram(this);
     }
 }

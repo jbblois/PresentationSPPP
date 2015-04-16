@@ -22,10 +22,10 @@ public abstract class VersionDAO {
         
         Version version = null;
         
-        String query =  "SELECT [FID_Extension], [Date] " +
+        String query =  "SELECT [Version].[FID_Extension],[Version].[Date] " +
                         "FROM [Version] " + 
-                        "WHERE [Numero] = ? " +
-                        "AND [FID_Document] = ?";
+                        "WHERE [Version].[Numero] = ? " +
+                        "AND [Version].[FID_Document] = ?;";
         
         PreparedStatement ps = null;
         
@@ -63,15 +63,15 @@ public abstract class VersionDAO {
         
         Version version = null;
         
-        String query =  "SELECT Numero, [FID_Extension], [Date] " +
+        String query =  "SELECT [Version].[Numero],[Version].[FID_Extension],[Version].[Date] " +
                         "FROM [Version] " +
-                        "WHERE [FID_Document] = ? " +
+                        "WHERE [Version].[FID_Document] = ? " +
                         "AND Numero =  " +
                         "( " +
-                        "	SELECT MAX([Numero]) " +
+                        "	SELECT MAX([Version].[Numero]) " +
                         "	FROM [Version] " +
-                        "	WHERE [FID_Document] = ? " +
-                        ")";
+                        "	WHERE [Version].[FID_Document] = ? " +
+                        ");";
         
         PreparedStatement ps = null;
         

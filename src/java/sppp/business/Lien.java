@@ -6,6 +6,7 @@
 package sppp.business;
 
 
+
 /**
  *
  * @author user
@@ -21,5 +22,9 @@ public class Lien
     public Integer Y2;
 
     public Lien() {
+    }
+    public String Coordonnees()
+    {
+        return ""+X1+','+Y1+','+X2+','+Y2;
     }
 }

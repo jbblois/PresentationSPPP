@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Date;
+import org.eclipse.jdt.internal.compiler.impl.Constant;
 
 /**
  *
@@ -25,6 +26,8 @@ public abstract class Base
     private static final String DATABASE_URL = "jdbc:"+DATABASE_TYPE+"://"+DATABASE_IP+":"+DATABASE_PORT+"/PresentationSPPP/";
     private static final String DATABASE_LOGIN = "sa";
     private static final String DATABASE_PASSWORD = "not24get";
+    
+    public static final String FILEBASE_PATH = "./FileBase";
     
     public static Connection GetConnection() {
         

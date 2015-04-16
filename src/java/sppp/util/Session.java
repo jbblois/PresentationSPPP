@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sppp.business;
-
+package sppp.util;
 /**
  *
  * @author user
  */
-public class Categorie 
+public abstract class Session
 {
-   public int ID;
-   public String Nom;
-   
+    
 }
